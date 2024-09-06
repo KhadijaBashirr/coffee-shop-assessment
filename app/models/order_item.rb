@@ -9,6 +9,7 @@ class OrderItem < ApplicationRecord
   private
 
   def calculate_price_with_tax
+    self.price = item.price + (Item.first.tax_bucket.percentage/100.to_f * Item.first.price)
     order.update(total: order.total + (item.price + (Item.first.tax_bucket.percentage/100.to_f * Item.first.price)))
   end
 end
