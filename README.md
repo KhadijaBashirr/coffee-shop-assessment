@@ -16,8 +16,8 @@ This project is a backend API for managing a coffee shop, built with Ruby on Rai
 
 1. Clone the repository
    ```
-https://github.com/KhadijaBashirr/coffee-shop-assessment
-cd coffee-shop-assessment
+   https://github.com/KhadijaBashirr/coffee-shop-assessment
+   cd coffee-shop-assessment
    ```
 
 2. Install dependencies
