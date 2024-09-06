@@ -21,8 +21,7 @@ end
 5.times do |i|
   TaxBucket.create!(
     tax_type: "Tax Type #{i + 1}",
-    tax_percentage: (i + 1) * 0.5,
-    tax: (i + 1) * 1.0
+    percentage: (i + 1) * 10,
   )
 end
 
@@ -53,14 +52,5 @@ end
     item_id: Item.pluck(:id).sample,
     quantity: (i + 1),
     discount: (i + 1) * 2.0
-  )
-end
-
-# Create Discounts
-20.times do |i|
-  Discount.create!(
-    item_id: Item.pluck(:id).sample,
-    required_item_id: Item.pluck(:id).sample,
-    percentage: (i + 1) * 1.0
   )
 end
