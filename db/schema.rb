@@ -20,7 +20,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_143150) do
   end
 
   create_table "customers", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.string "email", null: false
     t.string "phone_number"
     t.datetime "created_at", null: false
@@ -57,6 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_143150) do
     t.integer "item_id", null: false
     t.integer "quantity", null: false
     t.float "discount"
+    t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_order_items_on_item_id"
@@ -74,8 +75,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_143150) do
 
   create_table "tax_buckets", force: :cascade do |t|
     t.string "tax_type"
-    t.decimal "tax_percentage", precision: 5, scale: 2, null: false
-    t.float "tax"
+    t.integer "percentage", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

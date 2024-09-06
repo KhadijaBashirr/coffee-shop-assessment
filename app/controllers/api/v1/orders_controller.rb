@@ -23,14 +23,9 @@ module Api
 
       def show
         @order = Order.find(params[:id])
-        render json: @order
-      end
-
-      def show
-        @order = Order.find(params[:id])
 
         if @order
-          render json: { order: @order, order_items: @order.order_items }
+          render json: order, serializer: OrderSerializer, status: 200
         else
           render json: { message: 'order not found!'}, status: 404
         end
