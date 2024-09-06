@@ -1,25 +1,44 @@
-# README
+# Coffee Shop Assessment
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails-based backend for a coffee shop management system.
 
-Things you may want to cover:
+## Project Overview
 
-* Ruby version
+This project is a backend API for managing a coffee shop, built with Ruby on Rails. It provides endpoints for handling menu items, orders, and customer information.
 
-* System dependencies
+## Prerequisites
 
-* Configuration
+* Ruby version: 3.x.x
+* Rails version: 7.x.x
+* PostgreSQL
 
-* Database creation
+## Getting Started
 
-* Database initialization
+1. Clone the repository
+   ```
+   git clone https://github.com/your-username/coffee-shop-assessment.git
+   cd coffee-shop-assessment
+   ```
 
-* How to run the test suite
+2. Install dependencies
+   ```
+   bundle install
+   ```
 
-* Services (job queues, cache servers, search engines, etc.)
+3. Set up the database
+   ```
+   rails db:create db:migrate db:seed
+   ```
 
-* Deployment instructions
+4. Start the server
+   ```
+   rails server
+   ```
 
-* ...
-# coffee-shop-assessment
+The API will be available at `http://localhost:3000`.
+
+## API Documentation
+
+[Include a brief overview of your API endpoints here]
+
+## Running Tests
