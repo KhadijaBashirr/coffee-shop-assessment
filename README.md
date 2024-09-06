@@ -32,7 +32,7 @@ This project is a backend API for managing a coffee shop, built with Ruby on Rai
 
 4. Start the server
    ```
-   rails server
+   rails s -p 3001
    ```
 
-The API will be available at `http://localhost:3000`.
+The API will be available at `http://localhost:3001`.
