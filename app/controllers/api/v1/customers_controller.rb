@@ -1,13 +1,13 @@
 module Api
   module V1
     class CustomersController < ApplicationController
-      def create
-        @customer = Customer.new(customer_params)
-        
-        if @customer.save
-          render json: @customer, status: :created
+      def populate_with_email
+        @customer = Customer.find_by(email: params[:email])
+
+        if @customer
+          render json: @customer, status: 200
         else
-          render json: @customer.errors, status: :unprocessable_entity
+          render json: { message: "customer not found!"}, status: 404
         end
       end
 
