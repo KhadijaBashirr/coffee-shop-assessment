@@ -16,8 +16,7 @@ This project is a backend API for managing a coffee shop, built with Ruby on Rai
 
 1. Clone the repository
    ```
-[   git clone https://github.com/your-username/coffee-shop-assessment.git
-](https://github.com/KhadijaBashirr/coffee-shop-assessment)   
+https://github.com/KhadijaBashirr/coffee-shop-assessment
 cd coffee-shop-assessment
    ```
 
