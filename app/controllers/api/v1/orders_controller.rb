@@ -15,7 +15,7 @@ module Api
 
       def place_order
         if order.update(customer_id: @customer.id, status: :placed)
-          render json: { message: 'order has been placed!', order: OrderSerializer.new(order) }, status: 200
+          render json: { message: 'Your order has been place, you will be notfied after 10 minutes!', order: OrderSerializer.new(order) }, status: 200
         else
           render json: { message: 'unable to place order!'}, status: :unprocessable_entity
         end
