@@ -2,7 +2,7 @@ module Api
   module V1
     class ItemsController < ApplicationController
       def index
-        @items = Item.all
+        @items = Item.grouped_by_category
         render json: @items
       end
 

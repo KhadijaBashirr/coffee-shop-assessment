@@ -3,6 +3,7 @@ module Api
     class CustomersController < ApplicationController
       def create
         @customer = Customer.new(customer_params)
+        
         if @customer.save
           render json: @customer, status: :created
         else

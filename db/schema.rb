@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_06_151734) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_06_143150) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false
@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_151734) do
     t.index ["status"], name: "index_orders_on_status"
   end
 
-  create_table "taxbuckets", force: :cascade do |t|
+  create_table "tax_buckets", force: :cascade do |t|
     t.string "tax_type"
     t.decimal "tax_percentage", precision: 5, scale: 2, null: false
     t.float "tax"
