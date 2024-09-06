@@ -4,7 +4,13 @@ module Api
       before_action :find_or_create_customer, only: :place_order
 
       def add_item
-        @order_item = OrderItem.find_or_create_by(add_item_params)
+        @order_item = OrderItem.find_by(item_id: params[:item_id], order_id: order.id)
+
+        if @order_item
+          @order_item.update(quantity: @order_item.quantity + params[:quantity].to_i)
+        else
+          @order_item = OrderItem.create(add_item_params)
+        end
 
         if @order_item.save
           render json: { message: "Item has been added!", data: { order_item: @order_item } }, status: 200

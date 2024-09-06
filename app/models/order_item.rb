@@ -4,12 +4,12 @@ class OrderItem < ApplicationRecord
   belongs_to :order
   belongs_to :item
 
-  before_create :calculate_price_with_tax
+  before_save :calculate_price_with_tax
 
   private
 
   def calculate_price_with_tax
-    self.price = item.price + (Item.first.tax_bucket.percentage/100.to_f * Item.first.price)
-    order.update(total: order.total + (item.price + (Item.first.tax_bucket.percentage/100.to_f * Item.first.price)))
+    self.price = self.price + (item.price + (item.tax_bucket.percentage/100.to_f * item.price))
+    order.update(total: order.total + (item.price + (item.tax_bucket.percentage/100.to_f * item.price)))
   end
 end

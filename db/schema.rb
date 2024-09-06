@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_143150) do
     t.integer "item_id", null: false
     t.integer "quantity", null: false
     t.float "discount"
-    t.float "price"
+    t.float "price", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_order_items_on_item_id"
