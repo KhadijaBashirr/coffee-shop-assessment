@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_06_143150) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_11_142417) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false
@@ -28,23 +31,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_143150) do
     t.index ["email"], name: "index_customers_on_email", unique: true
   end
 
-  create_table "discounts", force: :cascade do |t|
-    t.integer "item_id", null: false
-    t.integer "required_item_id", null: false
-    t.decimal "percentage", precision: 5, scale: 2, null: false
+  create_table "discount_deals", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id", "required_item_id"], name: "index_discounts_on_item_id_and_required_item_id", unique: true
-    t.index ["item_id"], name: "index_discounts_on_item_id"
-    t.index ["required_item_id"], name: "index_discounts_on_required_item_id"
+    t.string "discount_name", null: false
+    t.string "discount_type", null: false
+    t.decimal "discount_amount", precision: 10, scale: 2
+    t.integer "item_ids", default: [], array: true
   end
 
   create_table "items", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false
-    t.decimal "price", precision: 10, scale: 2, null: false
-    t.integer "tax_bucket_id"
-    t.integer "category_id"
+    t.decimal "price", precision: 10, scale: 2, default: "0.0", null: false
+    t.bigint "tax_bucket_id"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_items_on_category_id"
@@ -53,11 +54,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_143150) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.integer "order_id", null: false
-    t.integer "item_id", null: false
-    t.integer "quantity", null: false
-    t.float "discount"
-    t.float "price"
+    t.bigint "order_id", null: false
+    t.bigint "item_id", null: false
+    t.integer "quantity", default: 0, null: false
+    t.float "discount", default: 0.0
+    t.float "price", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_order_items_on_item_id"
@@ -67,10 +68,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_143150) do
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id"
     t.integer "status", default: 0, null: false
-    t.decimal "total", precision: 10, scale: 2
+    t.decimal "total", precision: 10, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["status"], name: "index_orders_on_status"
   end
 
   create_table "tax_buckets", force: :cascade do |t|
@@ -80,8 +80,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_143150) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "discounts", "items"
-  add_foreign_key "discounts", "items", column: "required_item_id"
   add_foreign_key "items", "categories"
   add_foreign_key "items", "tax_buckets"
   add_foreign_key "order_items", "items"

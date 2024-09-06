@@ -6,6 +6,6 @@ class OrderCompletionJob < ApplicationJob
     order.update(status: :completed)
     # Here you would typically send a notification to the customer
     # This could be an email, SMS, or a push notification depending on your setup
-    puts "Order #{order_id} is ready for pickup!"
+    Rails.logger.debug { "Order #{order_id} is ready for pickup!" }
   end
 end

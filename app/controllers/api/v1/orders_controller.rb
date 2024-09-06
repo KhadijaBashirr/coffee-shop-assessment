@@ -7,7 +7,8 @@ module Api
         @order_item = OrderItem.find_or_create_by(add_item_params)
 
         if @order_item.save
-          render json: { message: "Item has been added!", data: { order_item: @order_item } }, status: 200
+          render json: { message: 'Item has been added!', data: { order_item: @order_item } },
+                 status: :ok
         else
           render json: @order_item.errors, status: :unprocessable_entity
         end
@@ -15,9 +16,10 @@ module Api
 
       def place_order
         if order.update(customer_id: @customer.id, status: :placed)
-          render json: { message: 'order has been placed!', order: OrderSerializer.new(order) }, status: 200
+          render json: { message: 'order has been placed!', order: OrderSerializer.new(order) },
+                 status: :ok
         else
-          render json: { message: 'unable to place order!'}, status: :unprocessable_entity
+          render json: { message: 'unable to place order!' }, status: :unprocessable_entity
         end
       end
 
@@ -25,9 +27,9 @@ module Api
         @order = Order.find(params[:id])
 
         if @order
-          render json: order, serializer: OrderSerializer, status: 200
+          render json: order, serializer: OrderSerializer, status: :ok
         else
-          render json: { message: 'order not found!'}, status: 404
+          render json: { message: 'order not found!' }, status: :not_found
         end
       end
 

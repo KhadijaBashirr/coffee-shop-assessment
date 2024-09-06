@@ -1,15 +1,22 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => '/jobmonitor'
+
   namespace :api do
     namespace :v1 do
-      get 'customers/populate_with_email'
-      resources :orders, only: [:show] do
+      resources :customers, only: [] do
+        collection do
+          get :populate_with_email
+        end
+      end
+      resources :orders do
         collection do
           post :add_item
           post :place_order
         end
       end
-      get 'items/index'
-      get 'items/show'
+      resources :items, only: %i[index show]
     end
   end
 end

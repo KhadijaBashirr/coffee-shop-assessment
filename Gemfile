@@ -1,73 +1,57 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
+ruby '3.3.1'
 
-ruby "3.2"
+gem 'bootsnap', '>= 1.4.2', require: false
+gem 'rails', '~> 7.1.4'
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.4"
+gem 'dotenv-rails', '~> 2.7.6'
+gem 'pg', '~> 1.3.5'
+gem 'puma', '~> 5.6'
+gem 'rack', '~> 2.2.3'
+gem 'rack-attack', '~> 6.6.1'
+gem 'rack-cors', '~> 1.1.1'
+gem 'sidekiq', '~> 6.4.2'
 
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails"
+gem 'nilify_blanks', '~> 1.4'
+gem 'ransack', '~> 3.2.1'
 
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 1.4"
-
-gem "rack-cors"
-
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
-
-# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
-
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
-
-#for specific attributes
+# Authentication
 gem 'active_model_serializers'
+gem 'devise', '~> 4.8.1'
+gem 'devise_token_auth', '~> 1.2.0'
 
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
+# Serializing json views
+gem 'jb', '~> 0.8.0'
 
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
-
-# Use Redis adapter to run Action Cable in production
-gem "redis", ">= 4.0.1"
-
-# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
-
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
-
-# Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
-
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+# Pagination
+gem 'pagy', '~> 5.10'
+gem 'rswag-api'
+gem 'rswag-ui'
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ]
-  gem "byebug"
+  gem 'byebug', '>= 11.0.1', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails', '~> 6.2.0'
+  gem 'faker', '~> 2.21.0'
+  gem 'rspec-rails', '~> 5.1.2'
+  gem 'rswag-specs'
 end
 
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
-
-  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
-
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem 'annotate', '~> 3.2.0'
+  gem 'letter_opener', '~> 1.8.1'
+  gem 'reek', '~> 6.1.1', require: false
+  gem 'rubocop', '~> 1.30.1', require: false
+  gem 'rubocop-rails', '~> 2.14.2', require: false
+  gem 'rubocop-rspec', '~> 2.11.1', require: false
+  gem 'spring', '~> 2.1.1'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem 'rspec-json_expectations', '~> 2.2.0'
+  gem 'shoulda-matchers', '~> 5.1.0'
+  gem 'simplecov', '~> 0.21.2'
+  gem 'webmock', '~> 3.14.0'
 end
+
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

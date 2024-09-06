@@ -5,9 +5,9 @@ module Api
         @customer = Customer.find_by(email: params[:email])
 
         if @customer
-          render json: @customer, status: 200
+          render json: @customer, status: :ok
         else
-          render json: { message: "customer not found!"}, status: 404
+          render json: { message: 'customer not found!' }, status: :not_found
         end
       end
 
