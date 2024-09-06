@@ -1,21 +1,17 @@
 module Api
   module V1
     class OrdersController < ApplicationController
-      before_action :create_or_get_order, only: :add_item
+      def add_item
+        @order_item = OrderItem.find_or_create_by(add_item_params)
 
-      def create
-        @order = Order.new(order_params)
-        if @order.save
-          calculate_total
-          OrderCompletionJob.set(wait: 5.minutes).perform_later(@order.id)
-          render json: @order, status: :created
+        if @order_item.save
+          render json: { message: "Item has been added!", data: { order_item: @order_item } }, status: 200
         else
           render json: @order.errors, status: :unprocessable_entity
         end
       end
 
-      def add_item
-        
+      def place_order
       end
 
       def show
@@ -25,12 +21,12 @@ module Api
 
       private
 
-      def create_or_get_order
-
+      def order
+        @order ||= order.find_or_create_by(id: params[:id])
       end
 
-      def order_params
-        params.require(:order).permit(:customer_id, order_items_attributes: %i[item_id quantity])
+      def add_item_params
+        params.permit(:item_id, :quantity).with_defaults(order_id: order)
       end
     end
   end
