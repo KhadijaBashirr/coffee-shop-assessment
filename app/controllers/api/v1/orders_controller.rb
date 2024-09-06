@@ -26,6 +26,16 @@ module Api
         render json: @order
       end
 
+      def show
+        @order = Order.find(params[:id])
+
+        if @order
+          render json: { order: @order, order_items: @order.order_items }
+        else
+          render json: { message: 'order not found!'}, status: 404
+        end
+      end
+
       private
 
       def order
